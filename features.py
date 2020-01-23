@@ -1,3 +1,5 @@
+import pandas as pd
+
 def df_add_features(df):
     df['WeekNumber'] = df['DateTime'].dt.week
     df['Month'] = df['DateTime'].dt.month
