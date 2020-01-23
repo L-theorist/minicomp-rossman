@@ -1,8 +1,9 @@
+import pandas as pd
 def df_clean(df):
     # Change Date from string to DateTime64
-    train['Date'] = pd.to_datetime(train['Date'])
+    df['Date'] = pd.to_datetime(df['Date'])
     # Drop NaNs
-    train_nona = train.dropna()
+    df = df.dropna()
     # Remove days when stores were closed
     df = df[df['Open'] == 1]
     # Remove zero sale days
