@@ -14,6 +14,11 @@ def model_RFR(data, features, target, fraction=1): #takes (clean) data, list of 
 
 #returns the model, can be used for predictions for ex. with regr.predict() 
 #syntax mdl.predict(df_percent.loc[:, features].iloc[999].values.reshape(1,-1))[0]
+def make_float(x):
+    if isinstance(x, float):
+        return x
+    else:
+        return x[0]
 
 def model_LinRegr(data, features, target, fraction=1):
     x = data.loc[:, features]
@@ -21,3 +26,20 @@ def model_LinRegr(data, features, target, fraction=1):
     linr = LinearRegression()
     linr.fit(x, y)
     return linr
+
+data.loc[:, feat].iloc[9217].values.reshape(1,-1))[0][0]
+
+def compare(model1, model2, features, target, data):
+    pred1 = data.apply(lambda row: model1.predict(row[features].values.reshape(1,-1))[0], axis=1)
+    pred2 = data.apply(lambda row: model2.predict(row[features].values.reshape(1,-1))[0], axis=1)
+    
+    
+#   for row in data:
+#        pred1 = data.apply(lambda row: model1.predict(row), axis=1)
+#        pred2 =  
+def metric(preds, actuals):
+    preds = preds.reshape(-1)
+    actuals = actuals.reshape(-1)
+    assert preds.shape == actuals.shape
+    return round(100 * np.linalg.norm((actuals - preds) / actuals) / np.sqrt(preds.shape[0]),3)
+
