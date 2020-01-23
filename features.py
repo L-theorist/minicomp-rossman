@@ -1,4 +1,5 @@
-def add_features(data):
-    data['Sales/Cust'] = data['Sales'] /  data['Customers']
+def df_add_features(df):
+    
+    df['Sales/Cust'] = df['Sales'] /  df['Customers']
     return data
     
