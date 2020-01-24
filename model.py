@@ -3,7 +3,7 @@
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.datasets import make_regression
 from sklearn.linear_model import LinearRegression
-
+import numpy as np
 def model_RFR(X, y, m=4, fraction=1): #takes (clean) data, list of features and target/list of targets if needed
     regr = RandomForestRegressor(max_depth=m, random_state=1, bootstrap=True, n_estimators=100)  #bootstramp True means samples with replacement
     regr.fit(X.values, y.values.reshape(-1,1))
