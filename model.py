@@ -37,9 +37,11 @@ def model_LinRegr(x, y, fraction=1):
 def model_predict(X, model):
     pred = X.apply(lambda row: make_float(model.predict(row.values.reshape(1,-1))[0]), axis=1)
     return pred
-def accuracy(X, y, model):
-    preds = model_predict(X, model)
-    actuals = y
+def accuracy(X, y, model, fraction=1):
+    #X = X.sample(frac=fraction) ##Watch out, do .sample before splitting X and y (!)
+    #y = y.sample(frac=fraction)
+    preds = model_predict(X, model).values
+    actuals = y.values
     return(metric(preds, actuals))
 #data.loc[:, feat].iloc[9217].values.reshape(1,-1))[0][0]
 
