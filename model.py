@@ -45,7 +45,7 @@ def model_predict(X, model):
 def accuracy(X, y, model, fraction=1):
     #X = X.sample(frac=fraction) ##Watch out, do .sample before splitting X and y (!)
     #y = y.sample(frac=fraction)
-    preds = model_predict(X, model).values
+    preds = model_predict(X, model)
     actuals = y.values
     return(metric(preds, actuals))
 #data.loc[:, feat].iloc[9217].values.reshape(1,-1))[0][0]
