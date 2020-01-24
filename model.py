@@ -4,8 +4,10 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.datasets import make_regression
 from sklearn.linear_model import LinearRegression
 import numpy as np
-def model_RFR(X, y, m=4, fraction=1): #takes (clean) data, list of features and target/list of targets if needed
-    regr = RandomForestRegressor(max_depth=m, random_state=1, bootstrap=True, n_estimators=100)  #bootstramp True means samples with replacement
+import matplotlib.pyplot as plt
+import os
+def model_RFR(X, y, m=4, n=100 fraction=1): #takes (clean) data, list of features and target/list of targets if needed
+    regr = RandomForestRegressor(max_depth=m, random_state=1, bootstrap=True, n_estimators=n)  #bootstramp True means samples with replacement
     regr.fit(X.values, y.values.reshape(-1,1))
     #RandomForestRegressor(max_depth=4, n_estimators=500, random_state=42)
     #print(regr.feature_importances_))
@@ -59,3 +61,14 @@ def metric(preds, actuals):
     assert preds.shape == actuals.shape
     return round(100 * np.linalg.norm((actuals - preds) / actuals) / np.sqrt(preds.shape[0]),3)
 
+
+
+def plot_feature_importances(model, features)#, image_dir=./):
+    importances = pd.DataFrame()
+    importances.loc[:, 'importances'] = model.feature_importances_
+    importances.loc[:, 'features'] = features
+    importances.sort_values('importances', inplace=True)
+    f, a = plt.subplots()
+    importances.plot(ax=a, kind='bar', x='features', y='importances')
+    plt.gcf().subplots_adjust(bottom=0.3)
+    #f.savefig(os.path.join(image_dir, 'importances.png'))
