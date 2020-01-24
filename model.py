@@ -6,6 +6,7 @@ from sklearn.linear_model import LinearRegression
 import numpy as np
 import matplotlib.pyplot as plt
 import os
+import pandas as pd
 def model_RFR(X, y, m=4, n=100, fraction=1): #takes (clean) data, list of features and target/list of targets if needed
     regr = RandomForestRegressor(max_depth=m, random_state=1, bootstrap=True, n_estimators=n)  #bootstramp True means samples with replacement
     regr.fit(X.values, y.values.reshape(-1,1))
