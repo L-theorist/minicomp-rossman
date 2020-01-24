@@ -4,10 +4,10 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.datasets import make_regression
 from sklearn.linear_model import LinearRegression
 
-def model_RFR(data, features, target, fraction=1): #takes (clean) data, list of features and target/list of targets if needed
-    regr = RandomForestRegressor(max_depth=4, random_state=1, bootstrap=True)  #bootstramp True means samples with replacement
+def model_RFR(X, y, m=4 fraction=1): #takes (clean) data, list of features and target/list of targets if needed
+    regr = RandomForestRegressor(max_depth=m, random_state=1, bootstrap=True)  #bootstramp True means samples with replacement
     regr.fit(data.loc[:, features].values, data[target].values.reshape(-1,1))
-    RandomForestRegressor(max_depth=4, n_estimators=500, random_state=42)
+    #RandomForestRegressor(max_depth=4, n_estimators=500, random_state=42)
     #print(regr.feature_importances_))
     #print(regr.predict([[0, 0, 0, 0]]))
     return regr
@@ -19,19 +19,33 @@ def make_float(x):
         return x
     else:
         return x[0]
-
+"""
 def model_LinRegr(data, features, target, fraction=1):
     x = data.loc[:, features]
     y = data.loc[:, target]
     linr = LinearRegression()
     linr.fit(x, y)
     return linr
+"""
+def model_LinRegr(data, fraction=1):
+    #x = data.iloc[:, :-1] features]
+    #y = data.loc[:, target]
+    linr = LinearRegression()
+    linr.fit(x, y)
+    return linr
 
-data.loc[:, feat].iloc[9217].values.reshape(1,-1))[0][0]
+def model_predict(X, model):
+    pred = X.apply(lambda row: make_float(model.predict(row.values.reshape(1,-1))[0]), axis=1)
+    return pred
+def accuracy(X, y, model):
+    preds = model_predict(X, model)
+    actuals = y
+    return(metric(preds, actuals))
+#data.loc[:, feat].iloc[9217].values.reshape(1,-1))[0][0]
 
-def compare(model1, model2, features, target, data):
-    pred1 = data.apply(lambda row: model1.predict(row[features].values.reshape(1,-1))[0], axis=1)
-    pred2 = data.apply(lambda row: model2.predict(row[features].values.reshape(1,-1))[0], axis=1)
+#def compare(model1, model2, features, target, data):
+#    pred1 = data.apply(lambda row: model1.predict(row[features].values.reshape(1,-1))[0], axis=1)
+#    pred2 = data.apply(lambda row: model2.predict(row[features].values.reshape(1,-1))[0], axis=1)
     
     
 #   for row in data:
