@@ -63,7 +63,7 @@ def metric(preds, actuals):
 
 
 
-def plot_feature_importances(model, features)#, image_dir=./):
+def plot_feature_importances(model, features):#, image_dir=./):
     importances = pd.DataFrame()
     importances.loc[:, 'importances'] = model.feature_importances_
     importances.loc[:, 'features'] = features
